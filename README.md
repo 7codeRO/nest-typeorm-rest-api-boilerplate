@@ -1,5 +1,23 @@
 # 7Code Nest.js Boilerplate
 
+## Features
+
+* Github Actions 
+* ESLint configuration
+* Built-in modules: LoggerModule, AuthModule, UserModule, RoleModule
+* Swagger API Documentation 
+* Global: API Service, Error handling, Validators
+* Environment Configuration
+* PM2 integration
+* Unit Test Example
+* JwtAuthGuard with `@HasRole` decorator
+* Validators: 
+    > * AbstractUniqueValueValidator
+    > * ArrayDistinctValidator
+    > * DateValidator
+    > * EntityExistsValidator
+    > * UniqueValueValidator
+
 ## Installation
 
 ```bash
