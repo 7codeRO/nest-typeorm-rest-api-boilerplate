@@ -1,4 +1,4 @@
-# 7Code Nest.js Boilerplate
+# Nest.js Starter Boilerplate using TypeScript and TypeORM
 
 ## Features
 
@@ -53,6 +53,13 @@
 * Pagination example
 * More unit tests 
 * Auth using Social Media
+* Demo link
+
+## Technology Stack
+* Node.js
+* TypeScript
+* TypORM
+* PostgreSQL
 
 ## Installation
 
@@ -109,13 +116,21 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Redis 
-
-```bash
-$ brew install redis
-
-$ brew services start redis
-```
-
 ## Nest useful CLI commands
 https://docs.nestjs.com/cli/usages
+
+## License
+
+  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+ 
+## Contribute
+
+-   Please give us :star: on Github, it **helps**!
+-   You are more than welcome to submit feature requests
+ 
+## Contributors
+View full list of our [contributors](https://github.com/GarryOne/nest-boilerplate-starter/graphs/contributors).
+
+## Contact us
+- Author - [GarryOne](https://twitter.com/GarryOne)
+- Website - [https://7code.ro](https://7code.ro/)
