@@ -13,13 +13,15 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
-import { RegisterUserDTO, UpdateUserDTO } from './user.dto';
+import { CreateUserDTO, RegisterUserDTO, UpdateUserDTO } from './user.dto';
 import { ADMIN_ROLE, USER_ROLE } from '../auth/auth.constants';
 import { JwtAuthGuard } from '../auth/auth.jwt.guard';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiProduces, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DeleteResult } from 'typeorm';
-import { FORBIDDEN_EXCEPTION_MESSAGE, UNAUTHORIZED_EXCEPTION_MESSAGE } from '../../shared/constants/strings';
+import { FORBIDDEN_EXCEPTION_MESSAGE, SUCCESS, UNAUTHORIZED_EXCEPTION_MESSAGE } from '../../shared/constants/strings';
 import { HasRole } from '../role/role.decorator';
+import { DefaultResponseDTO } from '../../shared/dto/default-response.dto';
+import { ROLES } from '../../shared/constants/constants';
 
 @ApiBearerAuth()
 @ApiTags('user')
@@ -43,6 +45,18 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @Get(':id')
+  @HasRole(ROLES.ADMIN, USER_ROLE)
+  @ApiOperation({ description: 'Get a user details' })
+  @ApiResponse({ status: 200, description: 'Success', type: DefaultResponseDTO })
+  @ApiResponse({ status: 400, description: 'Bad Request - The provided user id is missing or invalid' })
+  @ApiResponse({ status: 403, description: 'Forbidden - You do not have rights to access the resource' })
+  @ApiResponse({ status: 404, description: 'Not Found - Can not find a user by provided id' })
+  async findUser(@Param('id', ParseIntPipe) id: number): Promise<DefaultResponseDTO<User>> {
+    const user = await this.userService.findUser(id);
+    return { message: SUCCESS, data: user };
+  }
+
   @Post('')
   @HasRole(ADMIN_ROLE, USER_ROLE)
   @ApiOperation({ description: 'Add new user' })
@@ -51,7 +65,7 @@ export class UserController {
   @ApiResponse({ status: 201, description: 'Success', type: User })
   @ApiResponse({ status: 401, description: UNAUTHORIZED_EXCEPTION_MESSAGE })
   @ApiResponse({ status: 403, description: FORBIDDEN_EXCEPTION_MESSAGE })
-  async create(@Body() userData: RegisterUserDTO): Promise<any> {
+  async create(@Body() userData: RegisterUserDTO): Promise<User> {
     return this.userService.create(userData);
   }
 
@@ -64,7 +78,7 @@ export class UserController {
   @ApiResponse({ status: 200, description: 'Success', type: User })
   @ApiResponse({ status: 401, description: UNAUTHORIZED_EXCEPTION_MESSAGE })
   @ApiResponse({ status: 403, description: FORBIDDEN_EXCEPTION_MESSAGE })
-  async update(@Param('id', ParseIntPipe) userId: number, @Body() userData: UpdateUserDTO): Promise<any> {
+  async update(@Param('id', ParseIntPipe) userId: number, @Body() userData: UpdateUserDTO): Promise<User> {
     return this.userService.update(userId, userData);
   }
 
@@ -76,6 +90,7 @@ export class UserController {
   @ApiResponse({ status: 401, description: UNAUTHORIZED_EXCEPTION_MESSAGE })
   @ApiResponse({ status: 403, description: FORBIDDEN_EXCEPTION_MESSAGE })
   async delete(@Param('id', ParseIntPipe) userId: number): Promise<any> {
-    return this.userService.delete(userId);
+    await this.userService.delete(userId);
+    return { message: SUCCESS };
   }
 }

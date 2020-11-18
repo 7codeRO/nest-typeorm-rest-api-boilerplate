@@ -2,21 +2,57 @@
 
 ## Features
 
-* Github Actions 
-* ESLint configuration
-* Built-in modules: LoggerModule, AuthModule, UserModule, RoleModule
 * Swagger API Documentation 
-* Global: API Service, Error handling, Validators
-* Environment Configuration
-* PM2 integration
-* Unit Test Example
-* JwtAuthGuard with `@HasRole` decorator
+* Code Style
+    * ESLint with Prettier configuration
+* CI/CD
+    * Github Actions 
+        * Build
+        * Deploy DEV
+        * Deploy PROD
+    * PM2 integration
+    * Environment Configuration
+    * Pre-Commit
+        * Run lint
+        * Run test
+* Built-in modules
+    * LoggerModule
+        * Custom Logger implementation including also the TypeORM part
+        * Used Winston logger for dividing the logging into files by levels
+    * AuthModule
+    * UserModule
+    * RoleModule
+    * AttachmentModule
+        * Upload file capability
+* Global Built-in DTOs
+    * DefaultResponseDTO
+    * FailedResponseDTO
+* Error Handling
+    * BadRequestExceptionFilter
+    * HttpExceptionFilter
+    * ValidationExceptionFilter
+    * QueryFailedExceptionFilter
+        * Handling PostgreSQL custom error codes
+* Unit Test Examples
+    * user.controller.spec.ts
+* Auth:
+    * Login
+    * Register
+    * Reset Password
+    * JwtAuthGuard
+    * `@HasRole` decorator
 * Validators: 
-    > * AbstractUniqueValueValidator
-    > * ArrayDistinctValidator
-    > * DateValidator
-    > * EntityExistsValidator
-    > * UniqueValueValidator
+    * AbstractUniqueValueValidator
+    * ArrayDistinctValidator
+    * DateValidator
+    * EntityExistsValidator
+    * UniqueValueValidator
+
+## To-do features
+* Fix Current Unit Tests
+* Pagination example
+* More unit tests 
+* Auth using Social Media
 
 ## Installation
 

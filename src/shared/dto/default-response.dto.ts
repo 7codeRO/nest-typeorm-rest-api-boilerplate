@@ -1,11 +1,4 @@
-import { PaginationDTO } from './pagination.dto';
-import { SortOrderDTO } from './sort-order.dto';
-
-export class BasicPaginationDTO {
-  pagination?: PaginationDTO;
-
-  sortOrder?: SortOrderDTO;
-}
+import { BasicPaginationDTO } from './pagination.dto';
 
 export class BasicResponseDTO {
   message: string;

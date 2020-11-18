@@ -1,5 +1,3 @@
-import { OrderDirection } from '../dto/sort-order.dto';
-
 //eslint-disable-next-line
 require('dotenv').config();
 
@@ -16,6 +14,11 @@ export const ROLES = {
 };
 export const DEFAULT_PAGE_LIMIT = 10;
 export const MAX_PAGE_LIMIT = 100;
+
+export enum OrderDirection {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
 
 export const DEFAULT_SORT_BY = 'id';
 export const DEFAULT_ORDER = OrderDirection.DESC;
