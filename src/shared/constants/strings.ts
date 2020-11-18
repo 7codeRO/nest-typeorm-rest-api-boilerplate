@@ -7,6 +7,9 @@ export const USER_SELF_DELETE = 'You cannot delete yourself!';
 export const USER_NOT_FOUND = 'User was not found!';
 export const SUCCESS = 'Success!';
 export const NOTHING_TO_UPDATE = 'Nothing to update!';
+export const ATTACHMENT_NOT_FOUND = 'Attachment not found!';
+export const FILE_IS_MISSING = 'File is missing!';
+
 
 export const FORBIDDEN_EXCEPTION_MESSAGE =
   "Forbidden: you don't have permission to access this endpoint or resources on this server.";

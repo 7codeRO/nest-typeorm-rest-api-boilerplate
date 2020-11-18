@@ -27,7 +27,6 @@ import { ROLES } from '../../shared/constants/constants';
 @ApiTags('user')
 @Controller('user')
 @UseGuards(JwtAuthGuard)
-@UseInterceptors(ClassSerializerInterceptor)
 export class UserController {
   /**
    *

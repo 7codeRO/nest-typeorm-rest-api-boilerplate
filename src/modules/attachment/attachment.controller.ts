@@ -35,8 +35,8 @@ import { AttachmentDto, FileType } from './attachment.dto';
 import { Attachment } from './attachment.entity';
 import { AttachmentService } from './attachment.service';
 import { JwtAuthGuard } from '../auth/auth.jwt.guard';
-import { BasicSuccessResponseDto, SuccessResponseDto } from '../success-response.dto';
-import { FILE_IS_MISSING, SUCCESS } from '../../shared/strings';
+import { FILE_IS_MISSING, SUCCESS } from '../../shared/constants/strings';
+import { BasicResponseDTO, DefaultResponseDTO } from '../../shared/dto/default-response.dto';
 
 @ApiTags('attachment')
 @ApiBearerAuth()
@@ -54,9 +54,9 @@ export class AttachmentController {
   @ApiOperation({ description: 'Upload file' })
   @ApiBody({ type: AttachmentDto })
   @ApiConsumes('multipart/form-data')
-  @ApiResponse({ status: 201, description: 'Success', type: BasicSuccessResponseDto })
+  @ApiResponse({ status: 201, description: 'Success', type: BasicResponseDTO })
   @ApiResponse({ status: 400, description: 'Bad Request - File Too Large' })
-  async uploadFile(@UploadedFile() file: FileType): Promise<SuccessResponseDto<Attachment>> {
+  async uploadFile(@UploadedFile() file: FileType): Promise<DefaultResponseDTO<Attachment>> {
     if (!file) {
       throw new BadRequestException(FILE_IS_MISSING);
     }
@@ -74,9 +74,9 @@ export class AttachmentController {
   @ApiOperation({ description: 'Upload file' })
   @ApiBody({ type: AttachmentDto })
   @ApiConsumes('multipart/form-data')
-  @ApiResponse({ status: 201, description: 'Success', type: BasicSuccessResponseDto })
+  @ApiResponse({ status: 201, description: 'Success', type: BasicResponseDTO })
   @ApiResponse({ status: 400, description: 'Bad Request - File Too Large' })
-  async uploadSpreadsheet(@UploadedFile() file: FileType): Promise<SuccessResponseDto<Attachment>> {
+  async uploadSpreadsheet(@UploadedFile() file: FileType): Promise<DefaultResponseDTO<Attachment>> {
     if (!file) {
       throw new BadRequestException(FILE_IS_MISSING);
     }
@@ -94,9 +94,9 @@ export class AttachmentController {
   @ApiOperation({ description: 'Upload file' })
   @ApiBody({ type: AttachmentDto })
   @ApiConsumes('multipart/form-data')
-  @ApiResponse({ status: 201, description: 'Success', type: BasicSuccessResponseDto })
+  @ApiResponse({ status: 201, description: 'Success', type: BasicResponseDTO })
   @ApiResponse({ status: 400, description: 'Bad Request - File Too Large' })
-  async uploadImage(@UploadedFile() file: FileType): Promise<SuccessResponseDto<Attachment>> {
+  async uploadImage(@UploadedFile() file: FileType): Promise<DefaultResponseDTO<Attachment>> {
     if (!file) {
       throw new BadRequestException(FILE_IS_MISSING);
     }
@@ -111,9 +111,9 @@ export class AttachmentController {
 
   @Get(':id')
   @ApiOperation({ description: 'Get file' })
-  @ApiResponse({ status: 201, description: 'Success', type: BasicSuccessResponseDto })
+  @ApiResponse({ status: 201, description: 'Success', type: BasicResponseDTO })
   @ApiResponse({ status: 404, description: 'Not found - Attachment not found' })
-  async getFile(@Param('id', ParseIntPipe) id: number): Promise<SuccessResponseDto<Attachment>> {
+  async getFile(@Param('id', ParseIntPipe) id: number): Promise<DefaultResponseDTO<Attachment>> {
     const attachment = await this.attachmentService.findById(id);
 
     return {
@@ -159,9 +159,9 @@ export class AttachmentController {
 
   @Delete(':id')
   @ApiOperation({ description: 'Delete file' })
-  @ApiResponse({ status: 201, description: 'Success', type: BasicSuccessResponseDto })
+  @ApiResponse({ status: 201, description: 'Success', type: BasicResponseDTO })
   @ApiResponse({ status: 404, description: 'Not found - Attachment not found' })
-  async deleteFile(@Param('id', ParseIntPipe) id: number): Promise<SuccessResponseDto<null>> {
+  async deleteFile(@Param('id', ParseIntPipe) id: number): Promise<BasicResponseDTO> {
     await this.attachmentService.delete(id);
 
     return {

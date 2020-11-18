@@ -1,21 +1,18 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { DeleteResult } from 'typeorm';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './user.entity';
 import { RegisterUserDTO, UpdateUserDTO } from './user.dto';
 import { UserRepository } from './user.repository';
 import { plainToClass } from 'class-transformer';
 import { ROLES } from '../../shared/constants/constants';
-import { USER_NOT_FOUND, USER_SELF_DELETE } from '../../shared/constants/strings';
-import { AuthUser } from '../auth/auth.user.decorator';
+import { USER_NOT_FOUND } from '../../shared/constants/strings';
 
 @Injectable()
 export class UserService {
   /**
    *
    * @param {UserRepository} userRepository
-   * @param authUser
    */
-  constructor(private userRepository: UserRepository, @AuthUser() private authUser: User) {}
+  constructor(private userRepository: UserRepository) {}
 
   /**
    *
@@ -78,11 +75,6 @@ export class UserService {
    * @returns {Promise<boolean>}
    */
   async delete(id: number): Promise<boolean> {
-    const isTheSameUser = this.authUser.id === id;
-    if (isTheSameUser) {
-      throw new BadRequestException(USER_SELF_DELETE);
-    }
-
     await this.userRepository.delete(id);
     return true;
   }

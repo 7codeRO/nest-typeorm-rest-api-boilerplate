@@ -5,7 +5,7 @@ import { FileType } from './attachment.dto';
 import { Attachment } from './attachment.entity';
 import { AttachmentRepository } from './attachment.repository';
 import { MyLogger } from '../logger/logger.service';
-import { ATTACHMENT_NOT_FOUND } from '../../shared/strings';
+import { ATTACHMENT_NOT_FOUND } from '../../shared/constants/strings';
 
 @Injectable()
 export class AttachmentService {

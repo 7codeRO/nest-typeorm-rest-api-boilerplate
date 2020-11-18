@@ -14,6 +14,7 @@ import { UserModule } from '../user/user.module';
 import { SwaggerService } from '../../swagger/swagger.service';
 import { EntityExistValidator } from '../../shared/validators/entity-exist.validator';
 import { UniqueValueValidator } from '../../shared/validators/unique-value.validator';
+import { AttachmentModule } from '../attachment/attachment.module';
 import config from '../../database/config/local';
 
 @Module({
@@ -29,6 +30,7 @@ import config from '../../database/config/local';
     LoggerModule,
     AuthModule,
     RoleModule,
+    AttachmentModule,
     UserModule,
   ],
   controllers: [AppController],
