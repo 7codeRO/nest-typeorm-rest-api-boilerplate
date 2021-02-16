@@ -2,6 +2,7 @@ import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 
 import { CustomValidationException } from '../exceptions/validation.exception';
 import { FailedResponseDTO } from '../shared/dto/failed-response.dto';
+import { MyLogger } from '../modules/logger/logger.service';
 
 @Catch(CustomValidationException)
 export class ValidationExceptionFilter implements ExceptionFilter {
