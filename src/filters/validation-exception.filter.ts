@@ -9,6 +9,10 @@ export class ValidationExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const status = exception.getStatus();
+    
+    const logger = new MyLogger();
+    logger.setContext('CustomValidationException');
+    logger.error(JSON.stringify(exception.validationErrors));
 
     const resp: FailedResponseDTO = {
       errorMessage: exception.message,
